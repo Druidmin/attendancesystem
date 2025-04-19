@@ -1,0 +1,4 @@
+# Keep environment variables out of version control
+.env
+# Ignore MySQL socket file
+dbserver/mysql-data/mysql.sock
