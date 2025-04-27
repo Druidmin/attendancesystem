@@ -14,3 +14,4 @@ services:
     volumes:
       - ./mysql-data:/var/lib/mysql      # persistent data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql  # optional: auto-init script
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf  # Mount custom MySQL config

@@ -11,7 +11,11 @@ You can run the server in the terminal using the following command:
 
 php -S localhost:port -t phpserver/ (php server file must be named index.php for this to work)
 
+Make sure that you navigate to the phpserver folder first before running it.
+
 ## React application
-To run this, simply run the following command:
+To run this, navigate to the attendancesystem folder and simply run the following command:
 
 npm start
+
+You may need to run npm i first in order to get the application running without errors.
