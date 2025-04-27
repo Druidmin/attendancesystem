@@ -5,7 +5,7 @@ import './Navbar.css';
 function StudentNavbar() {
   return (
     <nav className="navbar">
-      <Link to="/" className="logo">StudentPortal</Link>
+      <Link to="/StudentHome" className="logo">StudentPortal</Link>
       <ul className="nav-links">
         <li>
           <Link to="/view-attendance-history">View Attendance History</Link>
@@ -14,7 +14,7 @@ function StudentNavbar() {
           <Link to="/view-attendance-percentage">View Attendance Percentage</Link>
         </li>
         <li>
-          <Link to="/components/login">Logout</Link>
+          <Link to="/components/Login">Logout</Link>
         </li>
       </ul>
     </nav>
