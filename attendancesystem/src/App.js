@@ -1,12 +1,23 @@
 import React from 'react';
 import './App.css';
 import Login from './components/Login';
+import AttendanceHistory from './components/attendance-history';
+import StudentHome from './components/StudentHome';
+import TeacherHome from './components/TeacherHome';
+import ViewAttendanceHistory from './components/view-attendance-history';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <Login />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/shome" element={<StudentHome />} />
+        <Route path="/thome" element={<TeacherHome />} />
+        <Route path="/attendancehistory" element={<AttendanceHistory />} />
+        <Route path="/vattendancehistory" element={<ViewAttendanceHistory />} />
+      </Routes>
+    </Router>
   );
 }
 
