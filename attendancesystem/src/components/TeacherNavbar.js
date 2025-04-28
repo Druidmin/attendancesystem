@@ -17,7 +17,7 @@ function TeacherNavbar() {
           <Link to="/attendance-history">Attendance History</Link>
         </li>
         <li>
-          <Link to="/components/Login">Logout</Link>
+          <Link to="/Login">Logout</Link>
         </li>
       </ul>
     </nav>

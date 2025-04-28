@@ -14,7 +14,7 @@ function StudentNavbar() {
           <Link to="/view-attendance-percentage">View Attendance Percentage</Link>
         </li>
         <li>
-          <Link to="/components/Login">Logout</Link>
+          <Link to="/Login">Logout</Link>
         </li>
       </ul>
     </nav>
