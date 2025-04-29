@@ -7,25 +7,25 @@ CREATE TABLE IF NOT EXISTS users (
   name VARCHAR(100) NOT NULL,
   username VARCHAR(100) UNIQUE,
   password VARCHAR(100),
-  role VARCHAR(50) CHECK (role IN ('admin', 'user')),
+  role VARCHAR(50) CHECK (role IN ('admin', 'user'))
 );
 
 CREATE TABLE IF NOT EXISTS attendance (
   id SERIAL PRIMARY KEY,
   student VARCHAR(100) REFERENCES users(name),
   date DATE NOT NULL,
-  status VARCHAR(10) CHECK (status IN ('present', 'absent')),
+  status VARCHAR(10) CHECK (status IN ('present', 'absent'))
 );
 
 CREATE TABLE IF NOT EXISTS courses (
   id SERIAL PRIMARY KEY,
-  name VARCHAR(100) NOT NULL,
+  name VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS course_enrollment (
   id SERIAL PRIMARY KEY,
   student VARCHAR(100) REFERENCES users(name),
-  course VARCHAR(100) REFERENCES courses(name),
+  course VARCHAR(100) REFERENCES courses(name)
 );
 
 CREATE PROCEDURE IF NOT EXISTS get_attendance(IN course_name VARCHAR(100))
