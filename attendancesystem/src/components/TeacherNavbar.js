@@ -5,7 +5,7 @@ import './Navbar.css';
 function TeacherNavbar() {
   return (
     <nav className="navbar">
-      <Link to="/TeacherHome" className="logo">TeacherPortal</Link>
+      <Link to="/thome" className="logo">TeacherPortal</Link>
       <ul className="nav-links">
         <li>
           <Link to="/generate-report">Generate Report</Link>
@@ -17,11 +17,9 @@ function TeacherNavbar() {
           <Link to="/attendance-history">Attendance History</Link>
         </li>
         <li>
-          <Link to="/Login">Logout</Link>
+          <Link to="/">Logout</Link>
         </li>
       </ul>
     </nav>
   );
 }
-
-export default TeacherNavbar; 
