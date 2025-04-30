@@ -23,3 +23,5 @@ function TeacherNavbar() {
     </nav>
   );
 }
+
+export default TeacherNavbar;

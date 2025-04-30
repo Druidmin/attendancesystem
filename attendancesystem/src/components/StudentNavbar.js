@@ -20,3 +20,5 @@ function StudentNavbar() {
     </nav>
   );
 }
+
+export default StudentNavbar;
