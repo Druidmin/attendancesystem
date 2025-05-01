@@ -2,38 +2,51 @@ import React, { useEffect, useState } from 'react';
 
 function ReportPage() {
   const [reportData, setReportData] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost/your-api-endpoint/getReport.php')
-      .then(response => response.json())
-      .then(data => setReportData(data))
-      .catch(error => console.error('Error fetching report:', error));
+    fetch('http://localhost/attendance-system/api/getReport.php')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        return response.json();
+      })
+      .then((data) => setReportData(data))
+      .catch((err) => setError(err.message));
   }, []);
 
   return (
-    React.createElement('div', null,
-      React.createElement('h2', null, 'Attendance Report'),
-      React.createElement('table', { border: 1 },
-        React.createElement('thead', null,
-          React.createElement('tr', null,
-            React.createElement('th', null, 'Student Name'),
-            React.createElement('th', null, 'Course'),
-            React.createElement('th', null, 'Date'),
-            React.createElement('th', null, 'Status')
-          )
-        ),
-        React.createElement('tbody', null,
-          reportData.map((entry, index) => (
-            React.createElement('tr', { key: index },
-              React.createElement('td', null, entry.name),
-              React.createElement('td', null, entry.course),
-              React.createElement('td', null, entry.date),
-              React.createElement('td', null, entry.status)
-            )
-          ))
-        )
-      )
-    )
+    <div style={{ padding: '20px' }}>
+      <h2>Attendance Report</h2>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <table border="1" cellPadding="8" cellSpacing="0">
+        <thead>
+          <tr>
+            <th>Student Name</th>
+            <th>Course</th>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {reportData.length > 0 ? (
+            reportData.map((entry, index) => (
+              <tr key={index}>
+                <td>{entry.name}</td>
+                <td>{entry.course}</td>
+                <td>{entry.date}</td>
+                <td>{entry.status}</td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="4">No data found.</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
   );
 }
 
