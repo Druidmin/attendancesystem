@@ -5,7 +5,6 @@
     color: brown;
     margin: 3rem;
 }
-.view-attendance-history p, .view-attendance-history h3{
+.view-attendance-history p, .view-attendance-history h3, .view-attendance-history tr, .view-attendance-history th{
     color: purple;
-    text-align: center;
 }
