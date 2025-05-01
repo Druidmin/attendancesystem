@@ -8,7 +8,6 @@ function AttendanceHistory() {
       <TeacherNavbar />
       <div className="content">
         <h1>Welcome to the Teacher Attendance History Page</h1>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
       </div>
     </div>
   );
