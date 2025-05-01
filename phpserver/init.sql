@@ -1,62 +1,60 @@
-CREATE DATABASE IF NOT EXISTS school_management;
+DROP DATABASE IF EXISTS school_management;
+CREATE DATABASE school_management;
 
 USE school_management;
 
 CREATE TABLE IF NOT EXISTS users (
   id SERIAL PRIMARY KEY,
-  name VARCHAR(100) NOT NULL,
+  name VARCHAR(100) NOT NULL UNIQUE,
   username VARCHAR(100) UNIQUE,
   password VARCHAR(100),
-  role VARCHAR(50) CHECK (role IN ('admin', 'user')),
+  role VARCHAR(50) CHECK (role IN ('admin', 'user'))
+);
+
+CREATE TABLE IF NOT EXISTS courses (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL unique
 );
 
 CREATE TABLE IF NOT EXISTS attendance (
   id SERIAL PRIMARY KEY,
   student VARCHAR(100) REFERENCES users(name),
+  course VARCHAR(50),
   date DATE NOT NULL,
   status VARCHAR(10) CHECK (status IN ('present', 'absent')),
-);
-
-CREATE TABLE IF NOT EXISTS courses (
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(100) NOT NULL,
+  FOREIGN KEY (student) REFERENCES users(name),
+  FOREIGN KEY (course) REFERENCES courses(name)
 );
 
 CREATE TABLE IF NOT EXISTS course_enrollment (
   id SERIAL PRIMARY KEY,
-  student VARCHAR(100) REFERENCES users(name),
-  course VARCHAR(100) REFERENCES courses(name),
+  student VARCHAR(100),
+  course VARCHAR(50),
+  FOREIGN KEY (student) REFERENCES users(name) ON DELETE CASCADE,
+  FOREIGN KEY (course) REFERENCES courses(name) ON DELETE CASCADE
 );
 
-CREATE PROCEDURE IF NOT EXISTS get_attendance(IN course_name VARCHAR(100))
-BEGIN
-SELECT student, group_concat(date, ': ', status) AS attendance FROM attendance order by student;
-END;
+-- Seed users
+INSERT INTO users (name, username, password, role) VALUES
+('Alice Smith', 'asmith', 'password123', 'user'),
+('Bob Johnson', 'bjohnson', 'securepass', 'user'),
+('Dr. Admin', 'admin', 'adminpass', 'admin');
 
-CREATE PROCEDURE IF NOT EXISTS get_student_attendance(IN course_name VARCHAR(100), IN student_name VARCHAR(100))
-BEGIN
-SELECT group_concat(date, ': ', status) AS attendance FROM attendance WHERE student = student_name order by date;
-END;
+-- Seed courses
+INSERT INTO courses (name) VALUES
+('Math 101'),
+('Science 202');
 
-CREATE PROCEDURE IF NOT EXISTS get_students(IN course_name VARCHAR(100))
-BEGIN
-SELECT student FROM course_enrollment WHERE course = course_name;
-END;
+-- Seed course_enrollment
+INSERT INTO course_enrollment (student, course) VALUES
+('Alice Smith', 'Math 101'),
+('Alice Smith', 'Science 202'),
+('Bob Johnson', 'Math 101');
 
-CREATE PROCEDURE IF NOT EXISTS get_studentcnt(IN course_name VARCHAR(100))
-BEGIN
-SELECT Count(*) FROM course_enrollment WHERE course = course_name;
-END;
-
-CREATE PROCEDURE IF NOT EXISTS get_attendancecnt(IN course_name VARCHAR(100))
-BEGIN
-SELECT Count(*) FROM attendance WHERE course = course_name and status = 'present';
-END;
-
-CREATE PROCEDURE IF NOT EXISTS create_user(IN name VARCHAR(100), IN username VARCHAR(100), IN password VARCHAR(100), IN role VARCHAR(50), IN course_name VARCHAR(100))
-BEGIN
-INSERT INTO users (name, username, password, role) VALUES (name, username, password, role);
-INSERT INTO course_enrollment (student, course) VALUES (name, course_name);
-END;
-
-INSERT INTO users (name, username, password, role) VALUES ('Sammi', 'sah9j', 'password123', 'admin');
+-- Seed attendance
+INSERT INTO attendance (student, course, date, status) VALUES
+('Alice Smith', 'Math 101', '2025-04-28', 'present'),
+('Alice Smith', 'Math 101', '2025-04-29', 'absent'),
+('Alice Smith', 'Science 202', '2025-04-28', 'present'),
+('Bob Johnson', 'Math 101', '2025-04-28', 'present'),
+('Bob Johnson', 'Math 101', '2025-04-29', 'present');
