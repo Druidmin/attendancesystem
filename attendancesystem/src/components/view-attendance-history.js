@@ -25,8 +25,7 @@ function ViewAttendanceHistory() {
       <StudentNavbar />
       <div className="content">
         <h1>Welcome to the Student Attendance History Page</h1>
-
-          {/*Example Attendance List*/}
+        {error && <p style={{ color: 'red' }}>{error}</p>}
         <div className="students-list">
           {students.length > 0 ? (
             students.map((student) => (
