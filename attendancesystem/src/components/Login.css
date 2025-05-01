@@ -64,12 +64,16 @@
   cursor: pointer;
   transition: background-color 0.3s;
   font-family: comic sans ms;
+<<<<<<< HEAD
   margin-bottom: 1rem;
+=======
+>>>>>>> 49da8b91eb942a5f3d511687146983bc1ec4825f
 }
 
 .login-button:hover {
   background-color: navy;
   color: lightskyblue;
+<<<<<<< HEAD
 }
 
 .create-account-button {
@@ -88,4 +92,6 @@
 .create-account-button:hover {
   background-color: #444;
   color: lightskyblue;
+=======
+>>>>>>> 49da8b91eb942a5f3d511687146983bc1ec4825f
 } 
