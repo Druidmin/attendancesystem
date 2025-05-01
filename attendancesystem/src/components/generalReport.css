@@ -5,7 +5,11 @@
   color: navy;
   margin: 3rem;
 }
-.generate-report p, .generate-report h3{
-  color: orange;
+.generate-report td, .generate-report th{
+  color: darkorange;
   text-align: center;
+}
+.generate-report table{
+  margin-left: auto;
+  margin-right: auto;
 }
