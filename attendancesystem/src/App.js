@@ -14,8 +14,8 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/shome" element={<StudentHome />} />
         <Route path="/thome" element={<TeacherHome />} />
-        <Route path="/attendancehistory" element={<AttendanceHistory />} />
-        <Route path="/vattendancehistory" element={<ViewAttendanceHistory />} />
+        <Route path="/attendance-history" element={<AttendanceHistory />} />
+        <Route path="/view-attendance-history" element={<ViewAttendanceHistory />} />
       </Routes>
     </Router>
   );
