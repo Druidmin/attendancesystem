@@ -1,15 +1,9 @@
 import React, { useState } from 'react';
-<<<<<<< HEAD
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
 const Login = () => {
   const navigate = useNavigate();
-=======
-import './Login.css';
-
-const Login = () => {
->>>>>>> 49da8b91eb942a5f3d511687146983bc1ec4825f
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -76,12 +70,9 @@ const Login = () => {
             {errors.password && <span className="error-message">{errors.password}</span>}
           </div>
           <button type="submit" className="login-button">Login</button>
-<<<<<<< HEAD
           <button type="button" className="create-account-button" onClick={() => navigate('/register')}>
             Create Account
           </button>
-=======
->>>>>>> 49da8b91eb942a5f3d511687146983bc1ec4825f
         </form>
       </div>
     </div>
