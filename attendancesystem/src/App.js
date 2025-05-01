@@ -16,6 +16,7 @@ function App() {
         <Route path="/thome" element={<TeacherHome />} />
         <Route path="/attendance-history" element={<AttendanceHistory />} />
         <Route path="/view-attendance-history" element={<ViewAttendanceHistory />} />
+        <Route path="/generate-report" element={<ReportPage />} />
       </Routes>
     </Router>
   );
