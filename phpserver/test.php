@@ -3,7 +3,7 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 $host = 'localhost';
 $port = 3306;
 $user = 'root';
-$pass = '';
+$pass = 'S3h3693sAm258!';
 
 $conn = new mysqli($host, $user, $pass, null, $port);
 
