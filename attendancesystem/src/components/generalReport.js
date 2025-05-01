@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import TeacherNavbar from './TeacherNavbar';
+import './generalReport.css';
 
 function ReportPage() {
   const [reportData, setReportData] = useState([]);
