@@ -5,6 +5,7 @@ import AttendanceHistory from './components/attendance-history';
 import StudentHome from './components/StudentHome';
 import TeacherHome from './components/TeacherHome';
 import ViewAttendanceHistory from './components/view-attendance-history';
+import ReportPage from './components/generalReport';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
