@@ -19,7 +19,8 @@ function ReportPage() {
   }, []);
 
   return (
-    <div style={{ padding: '20px' }}>
+    <div classname="generate-report" style={{ padding: '20px' }}>
+      <TeacherNavbar />
       <h2>Attendance Report</h2>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <table border="1" cellPadding="8" cellSpacing="0">
