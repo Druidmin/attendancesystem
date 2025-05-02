@@ -5,9 +5,15 @@ import './generalReport.css';
 function ReportPage() {
   const [reportData, setReportData] = useState([]);
   const [error, setError] = useState(null);
-
+/*
   useEffect(() => {
-    fetch('http://localhost/attendance-system/api/getReport.php')
+    fetch('/api/report', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ course_name: 'Math 101' }), // Replace with actual course name from prop
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to fetch data');
@@ -17,6 +23,30 @@ function ReportPage() {
       .then((data) => setReportData(data))
       .catch((err) => setError(err.message));
   }, []);
+*/
+
+useEffect(() => {
+    async function fetchReport() {
+      try {
+        const response = await fetch('/api/report',{
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ course_name: 'Math 101' })
+        });
+          const result = await response.json();
+          console.log(result.data);
+          setReportData(result.data);
+          //alert(result.message);
+      } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+    }
+    fetchReport();
+  }, []);
+
+
 
   return (
     <div className="generate-report">
@@ -36,10 +66,10 @@ function ReportPage() {
           {reportData.length > 0 ? (
             reportData.map((entry, index) => (
               <tr key={index}>
-                <td>{entry.name}</td>
-                <td>{entry.course}</td>
+                <td>{entry.student}</td>
+                <td>Math 101</td>
                 <td>{entry.date}</td>
-                <td>{entry.status}</td>
+                <td>{entry.attendance}</td>
               </tr>
             ))
           ) : (

@@ -59,6 +59,16 @@ if ($request === '/api/ping' && $method === 'GET') {
     $data = $result->fetch_all(MYSQLI_ASSOC);
     $stmt->close();
     echo json_encode(["message" => "Query successful!", "data" => $data]);
+} elseif ($request === '/api/report' && $method === 'POST'){
+    $data = json_decode(file_get_contents('php://input'), true);
+    $sql = "CALL get_attendance(?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $data['course_name']);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $data = $result->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
+    echo json_encode(["message" => "Query successful!", "data" => $data]);
 } else {
     http_response_code(404);
     echo json_encode(["error" => "Not Found"]);
