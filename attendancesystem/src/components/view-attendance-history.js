@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import StudentNavbar from './StudentNavbar';
 import './view-attendance-history.css';
-import getAttendance from '../utilities/api.js'; 
 
 function ViewAttendanceHistory() {
   
   // Example of fetch attendance information
   const [students, setStudents] = useState([]);
-
+  const [name, setName] = useState('Alice Smith');
+  const [course, setCourse] = useState('Math 101');
+  const [history, setHistory] = useState([]);
+  /*
   useEffect(() => {
     async function fetchStudents() {
       try {
@@ -19,6 +21,27 @@ function ViewAttendanceHistory() {
     }
     fetchStudents();
   }, []);
+*/
+
+
+  const handleClick = async () => {
+    try {
+    const response = await fetch('/api/studenthist',{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ course_name: course, student_name: name })
+    });
+      const result = await response.json();
+      console.log(result.data);
+      setHistory(result.data);
+      alert(result.message);
+    } catch (error) {
+      console.error("Error fetching students:", error);
+    }
+  }
+  
 
   return (
     <div className="view-attendance-history">
@@ -26,7 +49,8 @@ function ViewAttendanceHistory() {
       <div className="content">
         <h1>Welcome to the Student Attendance History Page</h1>
 
-          {/*Example Attendance List*/}
+        <button onClick={handleClick}>Test API</button>
+          {/*Example Attendance List
         <div className="students-list">
           {students.length > 0 ? (
             students.map((student) => (
@@ -40,10 +64,11 @@ function ViewAttendanceHistory() {
           ) : (
             <p>No students found.</p>
           )}
-        </div>
+        </div>*/}
       </div>
     </div>
   );
 }
 
 export default ViewAttendanceHistory;
+

@@ -1,15 +1,14 @@
 CREATE PROCEDURE get_attendance(IN course_name VARCHAR(100))
 BEGIN
-    SELECT student, GROUP_CONCAT(CONCAT(date, ': ', status) SEPARATOR ', ') AS attendance 
+    SELECT student, date, status AS attendance 
     FROM attendance 
     WHERE course = course_name 
-    GROUP BY student
     ORDER BY student;
 END;
 
 CREATE PROCEDURE get_student_attendance(IN course_name VARCHAR(100), IN p_student_name VARCHAR(100))
 BEGIN
-    SELECT GROUP_CONCAT(CONCAT(date, ': ', status) SEPARATOR ', ') AS attendance 
+    SELECT date, status AS attendance 
     FROM attendance 
     WHERE course = course_name AND student = p_student_name 
     ORDER BY date;

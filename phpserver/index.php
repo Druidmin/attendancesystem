@@ -4,13 +4,14 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 
+
 // Database connection
 
 $host = 'localhost';
 $port = 3306;
 // $db = 'school_management';
 $user = 'root';
-$pass = '';
+$pass = 'S3h3693sAm258!';
 
 $conn = new mysqli($host, $user, $pass, null, $port);
 
@@ -24,12 +25,19 @@ initDatabase($conn);
 
 // Simple router using the REQUEST_URI
 $request = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+
+//$scriptName = dirname($_SERVER['SCRIPT_NAME']); // Get the directory of the script
+//$request = str_replace($scriptName, '', $request); // Remove the script directory from the request path
+
 $method = $_SERVER['REQUEST_METHOD'];
 
 
 // Routes
 
-if ($request === '/api/attendance' && $method === 'GET') {
+if ($request === '/api/ping' && $method === 'GET') {
+    echo json_encode(["message" => "React successfully called the PHP API!"]);
+} elseif ($request === '/api/attendance' && $method === 'GET') {
     getAttendance($conn);
 
 } elseif ($request === '/api/users' && $method === 'GET') {
@@ -41,25 +49,16 @@ if ($request === '/api/attendance' && $method === 'GET') {
 } elseif ($request === '/api/course_enrollment' && $method === 'GET') {
     getCourse_Enrollment($conn);
 
-} elseif ($request === '/api/register' && $method === 'POST') {
-    // Handle POST request for attendance
-    $data = json_decode(file_get_contents("php://input"), true);
-    if (isset($data['course_name'])) {
-        $course_name = $data['course_name'];
-        $sql = "CALL get_attendance('$course_name')";
-        $result = $conn->query($sql);
-        if ($result) {
-            $data = $result->fetch_all(MYSQLI_ASSOC);
-            echo json_encode($data);
-        } else {
-            http_response_code(500);
-            echo json_encode(["error" => "Query failed"]);
-        }
-    } else {
-        http_response_code(400);
-        echo json_encode(["error" => "Invalid input"]);
-    }
-
+} elseif ($request === '/api/studenthist' && $method === 'POST') {
+    $data = json_decode(file_get_contents('php://input'), true);
+    $sql = "CALL get_student_attendance(?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $data['course_name'], $data['student_name']);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $data = $result->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
+    echo json_encode(["message" => "Query successful!", "data" => $data]);
 } else {
     http_response_code(404);
     echo json_encode(["error" => "Not Found"]);
@@ -154,6 +153,7 @@ function initDatabase($conn) {
     } else {
         http_response_code(500);
         echo json_encode(["error" => "Error initializing database: " . $conn->error]);
+        exit;
     }
 
     $sql = file_get_contents('functions.sql');
@@ -167,6 +167,5 @@ function initDatabase($conn) {
         http_response_code(500);
         echo json_encode(["error" => "Error initializing procedures: " . $conn->error]);
     }
-    echo json_encode(["message" => "Database initialized successfully"]);
 }
 ?>

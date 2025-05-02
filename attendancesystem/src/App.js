@@ -8,6 +8,9 @@ import ViewAttendanceHistory from './components/view-attendance-history';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
+
+  const [username, setUserName] = React.useState('');
+
   return (
     <Router>
       <Routes>
