@@ -6,11 +6,11 @@ BEGIN
     ORDER BY student;
 END;
 
-CREATE PROCEDURE get_student_attendance(IN course_name VARCHAR(100), IN p_student_name VARCHAR(100))
+CREATE PROCEDURE get_student_attendance(IN p_student_name VARCHAR(100))
 BEGIN
-    SELECT date, status AS attendance 
+    SELECT course, date, status AS attendance 
     FROM attendance 
-    WHERE course = course_name AND student = p_student_name 
+    WHERE student = p_student_name 
     ORDER BY date;
 END;
 

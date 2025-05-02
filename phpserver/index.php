@@ -51,9 +51,9 @@ if ($request === '/api/ping' && $method === 'GET') {
 
 } elseif ($request === '/api/studenthist' && $method === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
-    $sql = "CALL get_student_attendance(?, ?)";
+    $sql = "CALL get_student_attendance(?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss", $data['course_name'], $data['student_name']);
+    $stmt->bind_param("s", $data['student_name']);
     $stmt->execute();
     $result = $stmt->get_result();
     $data = $result->fetch_all(MYSQLI_ASSOC);
