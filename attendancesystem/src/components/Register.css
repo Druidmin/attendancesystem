@@ -22,13 +22,15 @@
 }
 
 .form-group {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .form-group label {
   display: block;
   margin-bottom: 0.5rem;
-  color: #333;
+  color: blue;
+  font-family: 'Courier New';
+  font-size: 1.75rem;
 }
 
 .form-group input,
