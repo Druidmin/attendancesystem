@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
+import { useNavigate } from 'react-router-dom';
 
 const Login = ({setUsername, role, setRole}) => {
   const navigate = useNavigate();
@@ -104,6 +105,7 @@ const Login = ({setUsername, role, setRole}) => {
             <p>Don't have an account? <a href="/register">Register here</a></p>
           </div>
         </form>
+        <button type="button" className="register-link" onClick={() => navigate('/register')}>Register Here</button>
       </div>
     </div>
   );
