@@ -21,7 +21,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/shome" element={<StudentHome />} />
         <Route path="/thome" element={<TeacherHome />} /> 
-        <Route path="/attendance-history" element={<AttendanceHistory />} />
+        <Route path="/attendance-history" element={<AttendanceHistory role={role}/>} />
         <Route path="/view-attendance-history" element={<ViewAttendanceHistory username={username} />} />
         <Route path="/generate-report" element={<ReportPage />} />
         <Route path="/register" element={<Register />} />

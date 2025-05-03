@@ -5,7 +5,7 @@ You will need to use a Database server, such as XAMPP or MYSQL Workbench, in ord
 ## PHP Server
 You can run the server in the terminal using the following command:
 
-php -S localhost:port -t phpserver/ (php server file must be named index.php for this to work)
+php -S localhost:8000 -t phpserver/ (php server file must be named index.php for this to work)
 
 Make sure that you navigate to the phpserver folder first before running it.
 
