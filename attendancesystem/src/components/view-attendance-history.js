@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import StudentNavbar from './StudentNavbar';
 import './view-attendance-history.css';
 
-function ViewAttendanceHistory() {
+function ViewAttendanceHistory({username}) {
   
-  const [name, setName] = useState('Alice Smith');
+  //const [name, setName] = useState('Alice Smith');
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -17,7 +17,7 @@ function ViewAttendanceHistory() {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ student_name: name })
+          body: JSON.stringify({ username: username })
         });
         
         if (!response.ok) {
@@ -52,7 +52,7 @@ function ViewAttendanceHistory() {
     <div className="view-attendance-history">
       <StudentNavbar />
       <div className="content">
-        <h1>Attendance History for {name}</h1>
+        <h1>Attendance History for {username}</h1>
         
         {loading ? (
           <p>Loading attendance data...</p>

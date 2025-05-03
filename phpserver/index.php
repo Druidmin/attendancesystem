@@ -19,7 +19,7 @@ $host = 'localhost';
 $port = 3306;
 // $db = 'school_management';
 $user = 'root';
-$pass = '';
+$pass = 'S3h3693sAm258!';
 
 $conn = new mysqli($host, $user, $pass, null, $port);
 
@@ -45,6 +45,22 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 if ($request === '/api/ping' && $method === 'GET') {
     echo json_encode(["message" => "React successfully called the PHP API!"]);
+} elseif ($request === '/api/login' && $method === 'POST') {
+    $data = json_decode(file_get_contents('php://input'), true);
+    $sql = "CALL get_user(?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $data['username'], $data['password']);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $data = $result->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
+    if (empty($data)) {
+        http_response_code(401);
+        echo json_encode(["error" => "Invalid username or password"]);
+    }
+    else {
+        echo json_encode(["message" => "Login successful!", "data" => $data]);
+    }
 } elseif ($request === '/api/attendance' && $method === 'GET') {
     getAttendance($conn);
 
@@ -58,10 +74,19 @@ if ($request === '/api/ping' && $method === 'GET') {
     getCourse_Enrollment($conn);
 
 } elseif ($request === '/api/studenthist' && $method === 'POST') {
+    // Get name associated with the username
     $data = json_decode(file_get_contents('php://input'), true);
+    $sql = "SELECT name from users where username = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $data['username']);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $data = $result->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
+    // Get attendance history for the student
     $sql = "CALL get_student_attendance(?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $data['student_name']);
+    $stmt->bind_param("s", $data[0]['name']);
     $stmt->execute();
     $result = $stmt->get_result();
     $data = $result->fetch_all(MYSQLI_ASSOC);
