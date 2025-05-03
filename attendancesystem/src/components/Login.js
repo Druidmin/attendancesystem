@@ -70,6 +70,7 @@ const Login = () => {
           <button type="submit" className="login-button">Login</button>
         </form>
       </div>
+      <Link to="/register">Register Here</Link>
     </div>
   );
 };

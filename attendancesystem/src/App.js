@@ -21,6 +21,7 @@ function App() {
         <Route path="/attendance-history" element={<AttendanceHistory />} />
         <Route path="/view-attendance-history" element={<ViewAttendanceHistory />} />
         <Route path="/generate-report" element={<ReportPage />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </Router>
   );

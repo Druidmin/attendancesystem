@@ -182,6 +182,7 @@ const Register = () => {
         </form>
         <button type="button" className="login-link" onClick={() => navigate('/')}>Back to Login</button>
       </div>
+      <Link to="/">Login Here</Link>
     </div>
   );
 };
