@@ -5,3 +5,6 @@
     color: navy;
     margin: 3rem;
 }
+.attendance-history p, .attendance-history h3, .attendance-history tr, .attendance-history th{
+    color: orange;
+}
