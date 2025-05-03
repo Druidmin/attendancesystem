@@ -180,8 +180,10 @@ const Register = () => {
             {errors.courses && <span className="error-message">{errors.courses}</span>}
           </div>
           <button type="submit" className="register-button">Register</button>
+          <div className="login-link">
+            <p>Already have an account? <a href="/">Login Here</a></p>
+          </div>
         </form>
-        <button type="button" className="login-link" onClick={() => navigate('/')}>Back to Login</button>
       </div>
     </div>
   );
