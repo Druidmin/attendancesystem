@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
-import { useNavigate } from 'react-router-dom';
 
 const Login = ({setUsername, role, setRole}) => {
   const navigate = useNavigate();
