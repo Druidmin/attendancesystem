@@ -4,10 +4,22 @@ import './generalReport.css';
 
 function ReportPage() {
   const [reportData, setReportData] = useState([]);
-  const [selectedCourse, setSelectedCourse] = useState('Math 101');
+  const [selectedCourse, setSelectedCourse] = useState('');
+  const [courses, setCourses] = useState([]);
   const [error, setError] = useState(null);
 
+  // Fetch all courses to populate dropdown
   useEffect(() => {
+    fetch('/api/courses')
+      .then((res) => res.json())
+      .then((data) => setCourses(data))
+      .catch((err) => setError("Failed to load courses"));
+  }, []);
+
+  // Fetch report when selectedCourse changes
+  useEffect(() => {
+    if (!selectedCourse) return;
+
     async function fetchReport() {
       try {
         const response = await fetch('/api/report', {
@@ -17,16 +29,11 @@ function ReportPage() {
           },
           body: JSON.stringify({ course_name: selectedCourse }),
         });
-
-        if (!response.ok) throw new Error('Failed to fetch data');
-
         const result = await response.json();
         setReportData(result.data);
-        setError(null);
       } catch (err) {
-        console.error('Error fetching data:', err);
-        setError(err.message);
-        setReportData([]); // Clear old data if error
+        console.error("Error fetching report:", err);
+        setError("Failed to fetch report");
       }
     }
 
@@ -38,14 +45,14 @@ function ReportPage() {
       <TeacherNavbar />
       <h1>Attendance Report</h1>
 
-      <select
-        value={selectedCourse}
-        onChange={(e) => setSelectedCourse(e.target.value)}
-        style={{ marginBottom: '20px', padding: '8px', fontSize: '16px' }}
-      >
-        <option value="Class 1">Math 101</option>
-        <option value="Class 2">Science 202</option>
-        <option value="Class 3">History 303</option>
+      <label>Select Course: </label>
+      <select onChange={(e) => setSelectedCourse(e.target.value)} value={selectedCourse}>
+        <option value="">-- Select a course --</option>
+        {courses.map((course, index) => (
+          <option key={index} value={course.course_name}>
+            {course.course_name}
+          </option>
+        ))}
       </select>
 
       {error && <p style={{ color: 'red' }}>{error}</p>}
@@ -79,4 +86,3 @@ function ReportPage() {
 }
 
 export default ReportPage;
-
