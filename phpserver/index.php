@@ -59,6 +59,59 @@ if ($request === '/api/ping' && $method === 'GET') {
     $data = $result->fetch_all(MYSQLI_ASSOC);
     $stmt->close();
     echo json_encode(["message" => "Query successful!", "data" => $data]);
+
+} elseif ($request === '/api/login' && $method === 'POST') {
+    $data = json_decode(file_get_contents('php://input'), true);
+    $sql = "CALL get_user(?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $data['username'], $data['password']);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $data = $result->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
+    echo json_encode(["message" => "Query successful!", "data" => $data]);
+
+
+} elseif ($request === '/api/studentpercentage' && $method === 'POST') {
+    $data = json_decode(file_get_contents('php://input'), true);
+    $sql = "CALL get_studentpercentage(?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $data['course'], $data['name']);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $data = $result->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
+    echo json_encode(["message" => "Query successful!", "data" => $data]);
+
+} elseif ($request === '/api/markattendance' && $method === 'POST') {
+    $data = json_decode(file_get_contents('php://input'), true);
+    $sql = "CALL mark_attendance(?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssss", $data['student_name'],
+    $data['course'], $data['date'], $data['status']);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $stmt->close();
+    echo json_encode(["message" => "Attendance successful!"]);
+
+
+} elseif ($request === '/api/register' && $method === 'POST') {
+    $data = json_decode(file_get_contents('php://input'), true);
+
+    $sql = "CALL create_user(?, ?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sssss", $data['student_name'], 
+    $data['username'], $data['password'], $data['role'],
+    $data['course_name']);
+
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $stmt->close();
+    echo json_encode(["message" => "Registration Successful"]);
+
+
 } elseif ($request === '/api/report' && $method === 'POST'){
     $data = json_decode(file_get_contents('php://input'), true);
     $sql = "CALL get_attendance(?)";
