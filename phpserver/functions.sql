@@ -43,7 +43,7 @@ BEGIN
     GROUP BY status;
 END;
 
-CREATE PROCEDURE create_user(IN p_name VARCHAR(100), IN p_username VARCHAR(100), IN p_password VARCHAR(100), IN p_role VARCHAR(50), IN p_course_name VARCHAR(100))
+CREATE PROCEDURE create_user(IN p_name VARCHAR(100), IN p_username VARCHAR(100), IN p_password VARCHAR(100), IN p_role VARCHAR(50))
 BEGIN
     INSERT INTO users (name, username, password, role) VALUES (p_name, p_username, p_password, p_role);
 END;

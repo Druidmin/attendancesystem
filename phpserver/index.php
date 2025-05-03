@@ -61,6 +61,21 @@ if ($request === '/api/ping' && $method === 'GET') {
     else {
         echo json_encode(["message" => "Login successful!", "data" => $data]);
     }
+} elseif ($request === '/api/register' && $method === 'POST') {
+    $data = json_decode(file_get_contents('php://input'), true);
+    $sql = "CALL create_user(?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssss", $data['student_name'], 
+    $data['username'], $data['password'], $data['role']);
+
+    if ($stmt->execute()) {
+        echo json_encode(["message" => "Registration Successful"]);
+    } else {
+        http_response_code(500);
+        echo json_encode(["error" => "Registration failed"]);
+    }
+    $stmt->close();
+
 } elseif ($request === '/api/attendance' && $method === 'GET') {
     getAttendance($conn);
 
