@@ -69,8 +69,8 @@ const Login = () => {
           </div>
           <button type="submit" className="login-button">Login</button>
         </form>
+        <button type="button" className="register-link" onClick={() => navigate('/register')}>Register Here</button>
       </div>
-      <Link to="/register">Register Here</Link>
     </div>
   );
 };
