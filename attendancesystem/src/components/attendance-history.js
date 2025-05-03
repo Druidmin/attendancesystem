@@ -16,7 +16,7 @@ function AttendanceHistory({role}) {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ username: username })
+          body: JSON.stringify({ role: role })
         });
         
         if (!response.ok) {
