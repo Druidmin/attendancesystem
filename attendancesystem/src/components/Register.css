@@ -65,7 +65,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: stencil;
+  font-family: stencil std;
   color: darkslateblue;
 }
 
