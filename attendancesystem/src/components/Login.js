@@ -101,7 +101,7 @@ const Login = ({setUsername, role, setRole}) => {
           </div>
           <button type="submit" className="login-button">Login</button>
           <div className="register-link">
-            <p>Don't have an account? <a href="/register">Register here</a></p>
+            <p>Don't have an account? <a href="/register">Register Here</a></p>
           </div>
         </form>
       </div>

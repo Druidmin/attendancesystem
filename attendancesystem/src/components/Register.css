@@ -3,22 +3,23 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #f5f5f5;
+  background-color: darkmagenta;
 }
 
 .register-box {
-  background-color: white;
+  background-color: lightgreen;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 500px;
+  max-width: 400px;
 }
 
 .register-box h2 {
   text-align: center;
+  color: darkred;
   margin-bottom: 1.5rem;
-  color: #333;
+  font-size: 3rem;
 }
 
 .form-group {
@@ -86,14 +87,15 @@
   color: white;
   border: none;
   border-radius: 4px;
-  font-size: 1rem;
+  font-size: 2rem;
   cursor: pointer;
-  margin-top: 1rem;
   transition: background-color 0.3s;
+  font-family: comic sans ms;
 }
 
 .register-button:hover {
-  background-color: #45a049;
+  background-color: navy;
+  color: lightskyblue;
 }
 
 .login-link {
