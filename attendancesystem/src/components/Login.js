@@ -104,7 +104,6 @@ const Login = ({setUsername, role, setRole}) => {
             <p>Don't have an account? <a href="/register">Register here</a></p>
           </div>
         </form>
-        <button type="button" className="register-link" onClick={() => navigate('/register')}>Register Here</button>
       </div>
     </div>
   );

@@ -70,3 +70,12 @@
   background-color: navy;
   color: lightskyblue;
 } 
+
+.register-link p{
+  color: orangered;
+  font-family: papyrus;
+}
+
+.register-link a{
+  color: darkmagenta;
+}
