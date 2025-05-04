@@ -4,6 +4,7 @@ import './attendance-history.css';
 
 function AttendanceHistory({username}) {
   //const [name, setName] = useState('Alice Smith');
+  const [studentName, setStudentName] = useState('');
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
