@@ -15,10 +15,12 @@
   color: darkorange;
 }
 .generate-report select {
-  display: block;
+  text-align: center;
 }
 .generate-report option {
   font-size: 2rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 .generate-report table{
   margin-left: auto;
