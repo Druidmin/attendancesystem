@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import TeacherNavbar from './TeacherNavbar';
 import './attendance-history.css';
 
-function AttendanceHistory({role}) {
+function AttendanceHistory({username}) {
   //const [name, setName] = useState('Alice Smith');
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -16,7 +16,7 @@ function AttendanceHistory({role}) {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ role: role })
+          body: JSON.stringify({ username: username })
         });
         
         if (!response.ok) {
@@ -50,7 +50,7 @@ function AttendanceHistory({role}) {
     <div className="attendance-history">
       <TeacherNavbar />
       <div className="content">
-        <h1>Attendance History for {role}</h1>
+        <h1>Attendance History for {studentName||username}</h1>
         {loading ? (
           <p>Loading attendance data...</p>
         ) : error ? (
