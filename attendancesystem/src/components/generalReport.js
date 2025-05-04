@@ -22,6 +22,7 @@ function ReportPage() {
 
         const result = await response.json();
         setReportData(result.data);
+        console.log('Report Data:', result.data);
         setError(null);
       } catch (err) {
         console.error('Error fetching data:', err);
