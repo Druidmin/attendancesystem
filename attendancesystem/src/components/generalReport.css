@@ -14,6 +14,7 @@
 .generate-report label{
   color: darkorange;
   text-align: center;
+  display: block;
 }
 .generate-report select {
   display: block;
