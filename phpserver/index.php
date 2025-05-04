@@ -63,10 +63,17 @@ if ($request === '/api/ping' && $method === 'GET') {
     }
 } elseif ($request === '/api/register' && $method === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
+    $student_name = $data['firstName'] . " " . $data['lastName'];
+    $role = '';
+    if ($data['role'] === 'student') {
+        $role = 'user';
+    } else if ($data['role'] === 'teacher') {
+        $role = 'admin';
+    } 
     $sql = "CALL create_user(?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssss", $data['student_name'], 
-    $data['username'], $data['password'], $data['role']);
+    $stmt->bind_param("ssss", $student_name, 
+    $data['username'], $data['password'], $role);
 
     if ($stmt->execute()) {
         echo json_encode(["message" => "Registration Successful"]);
