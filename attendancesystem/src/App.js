@@ -6,6 +6,7 @@ import AttendanceHistory from './components/attendance-history';
 import StudentHome from './components/StudentHome';
 import TeacherHome from './components/TeacherHome';
 import ViewAttendanceHistory from './components/view-attendance-history';
+import ViewAttendancePercentage from './components/view-attendance-percentage';
 import ReportPage from './components/generalReport';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/thome" element={<TeacherHome />} /> 
         <Route path="/attendance-history" element={<AttendanceHistory role={role}/>} />
         <Route path="/view-attendance-history" element={<ViewAttendanceHistory username={username} />} />
+        <Route path="/view-attendance-percentage" element={<ViewAttendancePercentage username={username} />} />
         <Route path="/generate-report" element={<ReportPage />} />
         <Route path="/register" element={<Register />} />
       </Routes>

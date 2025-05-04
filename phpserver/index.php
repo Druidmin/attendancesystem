@@ -96,17 +96,25 @@ if ($request === '/api/ping' && $method === 'GET') {
     $stmt->bind_param("s", $data['username']);
     $stmt->execute();
     $result = $stmt->get_result();
-    $data = $result->fetch_all(MYSQLI_ASSOC);
+    $userData = $result->fetch_all(MYSQLI_ASSOC);
     $stmt->close();
+    
+    // Store the student name for the response
+    $studentName = $userData[0]['name'] ?? $data['username'];
+    
     // Get attendance history for the student
     $sql = "CALL get_student_attendance(?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $data[0]['name']);
+    $stmt->bind_param("s", $userData[0]['name']);
     $stmt->execute();
     $result = $stmt->get_result();
     $data = $result->fetch_all(MYSQLI_ASSOC);
     $stmt->close();
-    echo json_encode(["message" => "Query successful!", "data" => $data]);
+    echo json_encode([
+        "message" => "Query successful!", 
+        "data" => $data,
+        "student_name" => $studentName
+    ]);
 
 } elseif ($request === '/api/login' && $method === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);

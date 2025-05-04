@@ -4,7 +4,7 @@ import './view-attendance-history.css';
 
 function ViewAttendanceHistory({username}) {
   
-  //const [name, setName] = useState('Alice Smith');
+  const [studentName, setStudentName] = useState('');
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -26,6 +26,12 @@ function ViewAttendanceHistory({username}) {
         
         const result = await response.json();
         console.log(result);
+        
+        // Extract student name if available in the API response
+        if (result.student_name) {
+          setStudentName(result.student_name);
+        }
+        
         setHistory(result.data || []);
         setLoading(false);
       } catch (error) {
@@ -37,7 +43,7 @@ function ViewAttendanceHistory({username}) {
     }
     
     fetchAttendance();
-  }, []);
+  }, [username]);
 
   // Group attendance records by course
   const attendanceByClass = history && history.length ? history.reduce((acc, record) => {
@@ -52,7 +58,7 @@ function ViewAttendanceHistory({username}) {
     <div className="view-attendance-history">
       <StudentNavbar />
       <div className="content">
-        <h1>Attendance History for {username}</h1>
+        <h1>Attendance History for {studentName || username}</h1>
         
         {loading ? (
           <p>Loading attendance data...</p>
