@@ -5,6 +5,11 @@
     color: brown;
     margin: 3rem;
 }
-.view-attendance-history p, .view-attendance-history h3, .view-attendance-history tr, .view-attendance-history th{
+.view-attendance-history p, .view-attendance-history h3, .view-attendance-history tr, 
+.view-attendance-history th, .view-attendance-history td{
     color: purple;
+}
+.view-attendance-history table {
+    border: 1;
+    margin: 2rem;
 }
