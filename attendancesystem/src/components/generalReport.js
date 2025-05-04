@@ -17,28 +17,24 @@ function ReportPage() {
   }, []);
 
   // Fetch report when selectedCourse changes
-  useEffect(() => {
-    if (!selectedCourse) return;
 
-    async function fetchReport() {
-      try {
-        const response = await fetch('/api/report', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ course_name: selectedCourse }),
-        });
-        const result = await response.json();
-        setReportData(result.data);
-      } catch (err) {
-        console.error("Error fetching report:", err);
-        setError("Failed to fetch report");
-      }
+  async function fetchReport(course) {
+    try {
+      setSelectedCourse(course);
+      const response = await fetch('/api/report', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ course_name: course }),
+      });
+      const result = await response.json();
+      setReportData(result.data);
+    } catch (err) {
+      console.error("Error fetching report:", err);
+      setError("Failed to fetch report");
     }
-
-    fetchReport();
-  }, [selectedCourse]);
+  };
 
   return (
     <div className="generate-report">
@@ -46,11 +42,11 @@ function ReportPage() {
       <h1>Attendance Report</h1>
 
       <label>Select Course: </label>
-      <select onChange={(e) => setSelectedCourse(e.target.value)} value={selectedCourse}>
+      <select onChange={(e) => fetchReport(e.target.value)} value={selectedCourse}>
         <option value="">-- Select a course --</option>
         {courses.map((course, index) => (
-          <option key={index} value={course.course_name}>
-            {course.course_name}
+          <option key={index} value={course.name}>
+            {course.name}
           </option>
         ))}
       </select>

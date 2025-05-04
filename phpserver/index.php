@@ -219,7 +219,7 @@ function getUsers($conn) {
     echo json_encode($data);
 }
 function getCourses($conn) {
-    $sql = "SELECT * FROM courses";
+    $sql = "SELECT name FROM courses";
     $result = $conn->query($sql);
 
     if (!$result) {
