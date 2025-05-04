@@ -9,7 +9,3 @@
 .view-attendance-history th, .view-attendance-history td{
     color: purple;
 }
-.view-attendance-history table {
-    border: 1;
-    margin: 2rem;
-}
