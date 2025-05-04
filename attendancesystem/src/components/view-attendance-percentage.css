@@ -6,6 +6,6 @@
     margin: 3rem;
 }
 .view-attendance-percentage p, .view-attendance-percentage h3, .view-attendance-percentage tr, 
-.view-attendance-history th, .view-attendance-history td{
+.view-attendance-percentage th, .view-attendance-percentage td{
     color: purple;
 }
