@@ -20,9 +20,9 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
-}
-.generate-report option {
   font-size: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 .generate-report table{
   margin-left: auto;
