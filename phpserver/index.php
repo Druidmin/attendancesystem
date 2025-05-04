@@ -144,22 +144,6 @@ if ($request === '/api/ping' && $method === 'GET') {
     echo json_encode(["message" => "Attendance successful!"]);
 
 
-} elseif ($request === '/api/register' && $method === 'POST') {
-    $data = json_decode(file_get_contents('php://input'), true);
-
-    $sql = "CALL create_user(?, ?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssss", $data['student_name'], 
-    $data['username'], $data['password'], $data['role'],
-    $data['course_name']);
-
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    $stmt->close();
-    echo json_encode(["message" => "Registration Successful"]);
-
-
 } elseif ($request === '/api/report' && $method === 'POST'){
     $data = json_decode(file_get_contents('php://input'), true);
     $sql = "CALL get_attendance(?)";
