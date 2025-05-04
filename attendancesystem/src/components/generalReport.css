@@ -11,6 +11,15 @@
 .generate-report td, .generate-report th{
   color: darkorange;
 }
+.generate-report label{
+  color: darkorange;
+}
+.generate-report select {
+  display: block;
+}
+.generate-report option {
+  font-size: 2rem;
+}
 .generate-report table{
   margin-left: auto;
   margin-right: auto;
