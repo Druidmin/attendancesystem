@@ -13,14 +13,15 @@
 }
 .generate-report label{
   color: darkorange;
+  text-align: center;
 }
 .generate-report select {
-  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 .generate-report option {
   font-size: 2rem;
-  margin-left: auto;
-  margin-right: auto;
 }
 .generate-report table{
   margin-left: auto;
